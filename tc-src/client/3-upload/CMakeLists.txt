@@ -1,0 +1,11 @@
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR})
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}../) 
+
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/client)
+INCLUDE_DIRECTORIES(/usr/include/jsoncpp)
+ 
+
+ADD_EXECUTABLE(tc-client3 tc-client-upload.cc)
+
+
+TARGET_LINK_LIBRARIES(tc-client3 muduo_net jsoncpp)

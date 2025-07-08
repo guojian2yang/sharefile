@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package shorturl_rpc;
+
+// 完整链接转短链请求
+message ConvertToShortUrlRequest {
+  string full_url = 1;
+}
+
+// 完整链接转短链响应
+message ConvertToShortUrlResponse {
+  int32 code = 1;
+  string urlmd5 = 2;
+}
+
+// 短链解析请求
+message ResolveShortUrlRequest {
+  string short_url = 1;
+}
+
+// 短链解析响应
+message ResolveShortUrlResponse {
+  int32 code = 1;
+  string full_url = 2;
+}
+
+// RPC 服务定义
+service ShortUrlService {
+  // 完整链接转短链
+  rpc ConvertToShortUrl(ConvertToShortUrlRequest) returns (ConvertToShortUrlResponse);
+  // 短链解析
+  rpc ResolveShortUrl(ResolveShortUrlRequest) returns (ResolveShortUrlResponse);
+}

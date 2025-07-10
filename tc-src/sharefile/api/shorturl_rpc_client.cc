@@ -15,7 +15,7 @@
 std::string sendRequest(const std::string& requestStr) {
     int sock = 0;
     struct sockaddr_in serv_addr;
-    char buffer[4096] = {0}; // 修改部分开始：增大缓冲区
+    char buffer[4096] = {0};
 
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         perror("socket creation error");
@@ -45,13 +45,12 @@ std::string sendRequest(const std::string& requestStr) {
     if (bytesRead > 0) {
         responseStr = std::string(buffer, bytesRead);
     }
-    // 修改部分结束
 
     close(sock);
     return responseStr;
 }
 
-// 分享图片
+// 长链接转短链接
 std::string convertToShortUrl(const std::string& fullUrl) {
 #if JSON_ENABLE
     Json::Value request;
@@ -61,12 +60,10 @@ std::string convertToShortUrl(const std::string& fullUrl) {
     Json::FastWriter writer;
     std::string requestStr = writer.write(request);
 #elif PROTOBUF_ENABLE
-    // 修改部分开始
     shorturl_rpc::ConvertToShortUrlRequest request;
     request.set_full_url(fullUrl);
     std::string requestStr;
     request.SerializeToString(&requestStr);
-    // 修改部分结束
 #endif
 
     std::string responseStr = sendRequest(requestStr);
@@ -81,7 +78,6 @@ std::string convertToShortUrl(const std::string& fullUrl) {
     }
     return "";
 #elif PROTOBUF_ENABLE
-    // 修改部分开始
     shorturl_rpc::ConvertToShortUrlResponse response;
     if (response.ParseFromString(responseStr)) {
         if (response.code() == 0) {
@@ -89,7 +85,6 @@ std::string convertToShortUrl(const std::string& fullUrl) {
         }
     }
     return "";
-    // 修改部分结束
 #endif
 }
 
@@ -103,12 +98,10 @@ std::string resolveShortUrl(const std::string& shortUrl) {
     Json::FastWriter writer;
     std::string requestStr = writer.write(request);
 #elif PROTOBUF_ENABLE
-    // 修改部分开始
     shorturl_rpc::ResolveShortUrlRequest request;
     request.set_short_url(shortUrl);
     std::string requestStr;
     request.SerializeToString(&requestStr);
-    // 修改部分结束
 #endif
 
     std::string responseStr = sendRequest(requestStr);
@@ -123,7 +116,6 @@ std::string resolveShortUrl(const std::string& shortUrl) {
     }
     return "";
 #elif PROTOBUF_ENABLE
-    // 修改部分开始
     shorturl_rpc::ResolveShortUrlResponse response;
     if (response.ParseFromString(responseStr)) {
         if (response.code() == 0) {
@@ -131,6 +123,5 @@ std::string resolveShortUrl(const std::string& shortUrl) {
         }
     }
     return "";
-    // 修改部分结束
 #endif
 }

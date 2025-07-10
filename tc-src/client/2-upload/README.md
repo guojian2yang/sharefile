@@ -4,7 +4,7 @@
 ```
 truncate -s 25M testfile.d
 ```
-我们是使用25M的文件作为测试大小。
+使用25M的文件作为测试大小。
 
 然后根据自己用户名和密码以及 服务器地址修改：
 ```
@@ -18,7 +18,7 @@ truncate -s 25M testfile.d
 
 ```
 
-还需要注意，这里修改了数据库的file_info表
+修改了数据库的file_info表
 ```
 DROP TABLE IF EXISTS `file_info`;
 CREATE TABLE `file_info` (
@@ -35,10 +35,3 @@ CREATE TABLE `file_info` (
 ) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8 COMMENT='文件信息表';
 ```
 将前缀索引改成了全字符串索引，因为这里的前缀索引其实会导致md5存在冲突的可能。
-
-
-
-
-# 参考
-MD5源码参考：
-https://www.cnblogs.com/luxiaoxun/archive/2013/04/08/3008808.html

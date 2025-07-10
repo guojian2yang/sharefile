@@ -51,9 +51,6 @@ int encodeSharePictureJson(int ret, string urlmd5, string &str_json) {
     return 0;
 }
 
-//分享图片
-// 1. 这个文件不存在我们就不分享
-// 2.这个文件是否存在不关注， 现在是第二种情况
 int handleSharePicture(const char *user, const char *filemd5,
                        const char *file_name, string &str_json) 
 {
@@ -64,7 +61,7 @@ int handleSharePicture(const char *user, const char *filemd5,
     int ret = 0;
     string key;
     string urlmd5;
-    urlmd5 = generateUUID(); // 这里我们先简单的，直接使用随机数代替 MD5的使用 可以使用token生成那个函数
+    urlmd5 = generateUUID();
     char create_time[TIME_STRING_LEN];
     time_t now;
     //获取当前时间

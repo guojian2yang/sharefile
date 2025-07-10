@@ -59,7 +59,7 @@ int CacheIncrCount(CacheConn *cache_conn, string key) {
     
     return 0;
 }
-// 这里最小我们只允许为0
+// 这里最小只允许为0
 int CacheDecrCount(CacheConn *cache_conn, string key) {
     int64_t count = 0;
     int ret = cache_conn->Decr(key, count);

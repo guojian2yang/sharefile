@@ -10,13 +10,13 @@
 - 共享下载榜：系统会统计用户分享的文件和图片的下载量，展示下载量排名前的文件和图片，方便用户发现热门分享。
 
 ## 编译运行
-- 编译：
-cd sharefile-src
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Debug ..
-make -j4
-- 运行：
-sudo ./bin/sharefile ./tc_http_server.conf
+### 编译：
+- cd sharefile-src
+- mkdir build
+- cd build
+- cmake -DCMAKE_BUILD_TYPE=Debug ..
+- make -j4
+### 运行：
+- sudo ./bin/sharefile ./tc_http_server.conf
 
 
